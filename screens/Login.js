@@ -7,7 +7,6 @@ import {
   Keyboard,
 } from "react-native";
 import { TextInput, Button, Snackbar } from "react-native-paper";
-import ErrorMessage from "../components/ErrorMessage";
 import colors from "../constants/colors";
 import settings from "../constants/settings";
 
@@ -79,6 +78,8 @@ export default function Login(props) {
             name="userName"
             value={login.userName}
             error={error.userVisible}
+            underlineColor={colors.primary}
+            activeUnderlineColor={colors.accent}
             onChangeText={(text) => {
               setLogin({ ...login, userName: text });
               setError({
@@ -96,6 +97,8 @@ export default function Login(props) {
             value={login.password}
             secureTextEntry={true}
             error={error.passVisible}
+            underlineColor={colors.primary}
+            activeUnderlineColor={colors.accent}
             onChangeText={(text) => {
               setLogin({ ...login, password: text });
               setError({

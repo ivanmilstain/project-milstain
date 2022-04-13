@@ -5,6 +5,7 @@ import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading';
 import Home from "./screens/Home";
 import Login from "./screens/Login";
+import MainNavigator from "./navigation/MainNavigator";
 
 export default function App() {
   const [userName, setUserName] = useState(null);
@@ -19,7 +20,7 @@ export default function App() {
     <PaperProvider>
       <SafeAreaProvider>
         {userName ? (
-          <Home userName={userName} setUserName={setUserName} />
+          <MainNavigator userName={userName} setUserName={setUserName} />
         ) : (
           <Login setUserName={setUserName} />
         )}

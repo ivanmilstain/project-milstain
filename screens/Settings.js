@@ -1,12 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-export default function Home(props) {
-  const {userName} = props;
-
+export default function Settings() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Bienvenido, {userName}</Text>
+      <Text style={styles.text}>Configuraciones</Text>
     </View>
   );
 }
@@ -19,7 +17,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   text: {
-    fontFamily: 'Bold',
-    fontSize: 20
-  }
+    fontFamily: "Bold",
+    fontSize: 20,
+  },
 });
