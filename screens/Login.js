@@ -74,7 +74,7 @@ export default function Login(props) {
         <Text style={styles.title}>Iniciar Sesión</Text>
         <View style={styles.formContainer}>
           <TextInput
-            label="Email"
+            label="Usuario"
             name="userName"
             value={login.userName}
             error={error.userVisible}

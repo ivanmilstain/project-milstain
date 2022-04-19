@@ -3,13 +3,13 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Home from "../screens/Home";
 import Settings from "../screens/Settings";
 import colors from "../constants/colors";
+import HomeStackNavigation from "./HomeStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
-export default function MainNavigator(props) {
+export default function MainTabNavigator(props) {
   const { userName, setUserName } = props;
 
   const logout = () => {
@@ -18,15 +18,20 @@ export default function MainNavigator(props) {
 
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+        options={{
+          headerShown: true,
+        }}
+      >
         <Tab.Screen
-          name="Home"
+          name="HomeStack"
           children={() => (
-            <Home userName={userName} setUserName={setUserName} />
+            <HomeStackNavigation userName={userName} />
           )}
           options={{
-            headerShown: true,
+            headerShown: false,
             tabBarActiveTintColor: colors.accent,
+            tabBarInactiveTintColor: colors.primary,
             tabBarIcon: ({ color, size }) => {
               return <Ionicons name={"home"} size={size} color={color} />;
             },
@@ -47,8 +52,8 @@ export default function MainNavigator(props) {
           name="Settings"
           component={Settings}
           options={{
-            headerShown: true,
             tabBarActiveTintColor: colors.accent,
+            tabBarInactiveTintColor: colors.primary,
             tabBarIcon: ({ color, size }) => {
               return <Ionicons name={"settings"} size={size} color={color} />;
             },

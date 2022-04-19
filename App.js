@@ -3,9 +3,8 @@ import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from 'expo-font'
 import AppLoading from 'expo-app-loading';
-import Home from "./screens/Home";
 import Login from "./screens/Login";
-import MainNavigator from "./navigation/MainNavigator";
+import MainTabNavigator from './navigation/MainTabNavigator';
 
 export default function App() {
   const [userName, setUserName] = useState(null);
@@ -20,7 +19,7 @@ export default function App() {
     <PaperProvider>
       <SafeAreaProvider>
         {userName ? (
-          <MainNavigator userName={userName} setUserName={setUserName} />
+          <MainTabNavigator userName={userName} setUserName={setUserName} />
         ) : (
           <Login setUserName={setUserName} />
         )}
