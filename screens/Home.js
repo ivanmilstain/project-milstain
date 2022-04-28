@@ -1,10 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { Button } from "react-native-paper";
+import { useSelector } from "react-redux";
 import { useNavigation } from '@react-navigation/native'
 
-export default function Home(props) {
- const {userName} = props;
+export default function Home() {
+ const userName = useSelector(state => state.user.userName)
  const navigation = useNavigation();
 
   return (

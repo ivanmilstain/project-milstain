@@ -2,6 +2,8 @@ import { StyleSheet, View, TouchableOpacity } from "react-native";
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useDispatch } from "react-redux";
+import { setUserName } from "../store/actions/user.action";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Settings from "../screens/Settings";
 import colors from "../constants/colors";
@@ -9,12 +11,8 @@ import HomeStackNavigation from "./HomeStackNavigation";
 
 const Tab = createBottomTabNavigator();
 
-export default function MainTabNavigator(props) {
-  const { userName, setUserName } = props;
-
-  const logout = () => {
-    setUserName(null);
-  };
+export default function MainTabNavigator() {
+  const dispatch = useDispatch();
 
   return (
     <NavigationContainer>
@@ -25,9 +23,7 @@ export default function MainTabNavigator(props) {
       >
         <Tab.Screen
           name="HomeStack"
-          children={() => (
-            <HomeStackNavigation userName={userName} />
-          )}
+          component={HomeStackNavigation}
           options={{
             headerShown: false,
             tabBarActiveTintColor: colors.accent,
@@ -35,17 +31,6 @@ export default function MainTabNavigator(props) {
             tabBarIcon: ({ color, size }) => {
               return <Ionicons name={"home"} size={size} color={color} />;
             },
-            headerRight: () => (
-              <View style={styles.buttonLogoutContainer}>
-                <TouchableOpacity onPress={() => logout()}>
-                  <Ionicons
-                    name="log-out-outline"
-                    color={colors.primary}
-                    size={28}
-                  />
-                </TouchableOpacity>
-              </View>
-            ),
           }}
         />
         <Tab.Screen
@@ -59,7 +44,7 @@ export default function MainTabNavigator(props) {
             },
             headerRight: () => (
               <View style={styles.buttonLogoutContainer}>
-                <TouchableOpacity onPress={() => logout()}>
+                <TouchableOpacity onPress={() => dispatch(setUserName(null))}>
                   <Ionicons
                     name="log-out-outline"
                     color={colors.primary}

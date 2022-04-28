@@ -7,11 +7,14 @@ import {
   Keyboard,
 } from "react-native";
 import { TextInput, Button, Snackbar } from "react-native-paper";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserName } from "../store/actions/user.action";
 import colors from "../constants/colors";
 import settings from "../constants/settings";
 
-export default function Login(props) {
-  const { setUserName } = props;
+export default function Login() {
+  const userName = useSelector((state) => state.user.userName);
+  const dispatch = useDispatch()
   const [login, setLogin] = useState({
     userName: "",
     password: "",
@@ -52,7 +55,8 @@ export default function Login(props) {
       login.userName.toLowerCase() === settings.userTest &&
       login.password === settings.passTest
     ) {
-      setUserName(login.userName);
+      dispatch(setUserName(login.userName))
+      console.log('LLEGA')
     } else {
       setError({
         ...error,
@@ -143,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   title: {
     fontFamily: "Bold",

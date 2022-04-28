@@ -1,29 +1,26 @@
-import { useState } from "react";
 import { Provider as PaperProvider } from "react-native-paper";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { useFonts } from 'expo-font'
-import AppLoading from 'expo-app-loading';
-import Login from "./screens/Login";
-import MainTabNavigator from './navigation/MainTabNavigator';
+import { useFonts } from "expo-font";
+import { Provider as ReduxProvider } from "react-redux";
+import store from "./store";
+import AppLoading from "expo-app-loading";
+import Index from "./screens/Index";
 
 export default function App() {
-  const [userName, setUserName] = useState(null);
   const [loaded] = useFonts({
-    Regular: require('./assets/fonts/Quicksand-Regular.ttf'),
-    Bold: require('./assets/fonts/Quicksand-Bold.ttf'),
-  })
+    Regular: require("./assets/fonts/Quicksand-Regular.ttf"),
+    Bold: require("./assets/fonts/Quicksand-Bold.ttf"),
+  });
 
-  if (!loaded) return <AppLoading />
+  if (!loaded) return <AppLoading />;
 
   return (
-    <PaperProvider>
-      <SafeAreaProvider>
-        {userName ? (
-          <MainTabNavigator userName={userName} setUserName={setUserName} />
-        ) : (
-          <Login setUserName={setUserName} />
-        )}
-      </SafeAreaProvider>
-    </PaperProvider>
+    <ReduxProvider store={store}>
+      <PaperProvider>
+        <SafeAreaProvider>
+          <Index />
+        </SafeAreaProvider>
+      </PaperProvider>
+    </ReduxProvider>
   );
 }
