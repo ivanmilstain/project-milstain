@@ -8,6 +8,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Settings from "../screens/Settings";
 import colors from "../constants/colors";
 import HomeStackNavigation from "./HomeStackNavigation";
+import QRScanner from "../screens/QRScanner";
 
 const Tab = createBottomTabNavigator();
 
@@ -31,6 +32,28 @@ export default function MainTabNavigator() {
             tabBarIcon: ({ color, size }) => {
               return <Ionicons name={"home"} size={size} color={color} />;
             },
+          }}
+        />
+        <Tab.Screen
+          name="QRScanner"
+          component={QRScanner}
+          options={{
+            tabBarActiveTintColor: colors.accent,
+            tabBarInactiveTintColor: colors.primary,
+            tabBarIcon: ({ color, size }) => {
+              return <Ionicons name={"qr-code"} size={size} color={color} />;
+            },
+            headerRight: () => (
+              <View style={styles.buttonLogoutContainer}>
+                <TouchableOpacity onPress={() => dispatch(setUserName(null))}>
+                  <Ionicons
+                    name="log-out-outline"
+                    color={colors.primary}
+                    size={28}
+                  />
+                </TouchableOpacity>
+              </View>
+            ),
           }}
         />
         <Tab.Screen
